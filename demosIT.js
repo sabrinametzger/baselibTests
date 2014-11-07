@@ -2,17 +2,23 @@
 var wd = require('webdriver-sync');
 var chai = require('chai');
 var assert = chai.assert;
-var FirefoxDriver = wd.FirefoxDriver;
-var driver = new FirefoxDriver();
-driver.get("http://baselib.ai.1und1.de/0.9.24-SNAPSHOT/docs/demos/");
-// driver.manage().window().maximize();
+var FirefoxDriver;
+var driver;
+
+before(function() {
+  this.timeout(30000);
+  FirefoxDriver = wd.FirefoxDriver;
+  driver = new FirefoxDriver();
+  driver.get("http://baselib.ai.1und1.de/0.9.24-SNAPSHOT/docs/demos/");
+  driver.manage().window().maximize();
+})
 after(function() {
   driver.quit();
 });
 
 
 describe("carousel widget", function() {
-
+  this.timeout(30000);
 
   it("check submenu", function() {
     driver.findElement(wd.By.id("carouselWidget")).click();
@@ -24,7 +30,6 @@ describe("carousel widget", function() {
 
 
   it("check endless loop", function() {
-    this.timeout(3600);
     driver.findElement(wd.By.id("carouselWidget")).click();
     driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Endless loop']")).click();
     waitUntil(wd.By.xpath("//div[contains(@class,'qx-carousel-arrow qx-carousel-backward')]"));
@@ -40,7 +45,6 @@ describe("carousel widget", function() {
 
 
   it("check auto-animated", function(done) {
-    this.timeout(4300);
     var img;
     driver.findElement(wd.By.id("carouselWidget")).click();
     driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Auto-animated endless loop']")).click();
@@ -57,7 +61,7 @@ describe("carousel widget", function() {
 
 
   it("check no loop mode", function(done) {
-    this.timeout(10000);
+
     var forward;
     driver.findElement(wd.By.id("carouselWidget")).click();
     driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'No loop mode']")).click();
@@ -76,8 +80,9 @@ describe("carousel widget", function() {
 
 });
 
+
 describe("coverflow widget", function() {
-  this.timeout(10000);
+  this.timeout(30000);
 
   it("check submenu", function() {
     driver.findElement(wd.By.id("coverflowWidget")).click();
@@ -87,6 +92,7 @@ describe("coverflow widget", function() {
     var submenu4 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Carousel mode']"));
     assert.isTrue(submenu1.isDisplayed() && submenu2.isDisplayed() && submenu3.isDisplayed() && submenu4.isDisplayed());
   });
+
 
   it("check 2D-style", function() {
     driver.findElement(wd.By.id("coverflowWidget")).click();
@@ -112,9 +118,9 @@ describe("coverflow widget", function() {
   });
 });
 
-describe("lightbox widget", function() {
-  this.timeout(4000);
 
+describe("lightbox widget", function() {
+  this.timeout(30000);
   it("check headline", function() {
     driver.findElement(wd.By.id("lightboxWidget")).click();
     waitUntil(wd.By.xpath("//h1[contains(@class,'headline-a1')]"));
@@ -130,7 +136,6 @@ describe("lightbox widget", function() {
     var lightbox = driver.findElement(wd.By.xpath("//div[contains(@class,'qx-lightbox-content lightbox_content')]")).getText();
     assert.equal("Please log in\nUsername:\nPassword:", lightbox);
     driver.findElement(wd.By.id("button-1")).click();
-
   });
 
 
@@ -142,19 +147,15 @@ describe("lightbox widget", function() {
     assert.equal("Small demo to demonstrate that the lightBox configuration includes also the color and the transparency of the blocker element.", lightbox);
     driver.findElement(wd.By.id("button-2")).click();
   });
-
 });
 
-describe("slider widget", function() {
-  this.timeout(4000);
 
-  it("check headline", function() {
-    var slider = driver.findElement(wd.By.id("sliderWidget"));
-    slider.click();
-    waitUntil(wd.By.xpath("//h1[contains(@class,'headline-a1')]"));
-    var headline = driver.findElement(wd.By.xpath("//h1[contains(@class,'headline-a1')]")).getText();
-    assert.equal(headline, "Slider");
-  });
+describe("slider widget", function() {
+  this.timeout(30000);
+
+  beforeEach(function() {
+    wd.sleep(2000);
+  })
 
   it("check slider positive", function() {
     driver.findElement(wd.By.id("sliderWidget")).click();
@@ -167,6 +168,7 @@ describe("slider widget", function() {
     assert.equal(knob.getText(), "500");
   });
 
+
   it("check slider negative", function() {
     driver.findElement(wd.By.id("sliderWidget")).click();
     var knob = driver.findElement(wd.By.id("knob"));
@@ -178,16 +180,14 @@ describe("slider widget", function() {
     assert.equal(knob.getText(), "0");
   });
 
-  it("check slider with scaling", function() {
 
-    setTimeout(function() {
-      driver.findElement(wd.By.id("sliderWidget")).click();
-    }, 300);
+  it("check slider with scaling", function() {
+    driver.findElement(wd.By.id("sliderWidget")).click();
 
     var knob = driver.findElement(wd.By.xpath("//div[contains(@class,'knob alphapng knob2')]"));
     // var slider = driver.findElement(wd.By.xpath("//div[contains(@class,'myslider pos1 alphapng qx-widget qx-slider')]"));
     var positionBefore = knob.getLocation().getX();
-    var slider = driver.findElement(wd.By.id("myslider"));
+    var slider = driver.findElement(wd.By.id("slider-body-cpu"));
     driver.getMouse()._instance.mouseDownSync(knob._instance.getCoordinatesSync());
     driver.getMouse()._instance.mouseMoveSync(slider._instance.getCoordinatesSync());
     driver.getMouse()._instance.mouseUpSync(slider._instance.getCoordinatesSync());
@@ -197,14 +197,17 @@ describe("slider widget", function() {
 
 });
 
+
 describe("datePicker widget", function() {
-  this.timeout(4000);
+  this.timeout(30000);
+
   it("check headline", function() {
     driver.findElement(wd.By.id("datePickerWidget")).click();
     waitUntil(wd.By.xpath("//h1[contains(@class,'headline-a1')]"));
     var headline = driver.findElement(wd.By.xpath("//h1[contains(@class,'headline-a1')]")).getText();
     assert.equal(headline, "Date Picker");
   });
+
 
   it("check date picker with user input enabled", function() {
     var input = driver.findElement(wd.By.id("datepicker-basic"));
@@ -215,6 +218,7 @@ describe("datePicker widget", function() {
     assert.equal("01/01/2015", input.getAttribute("value"));
     input.click();
   });
+
 
   it("check date picker with additional icon", function() {
     var icon = driver.findElement(wd.By.xpath("//img[contains(@class,'qx-datepicker-icon')]"));
@@ -251,8 +255,12 @@ describe("datePicker widget", function() {
     textfield.click();
   });
 });
+
+
 describe("autocompletion widget", function() {
+
   this.timeout(30000);
+
   it("check submenu", function() {
     driver.findElement(wd.By.id("autocompletionWidget")).click();
 
@@ -264,6 +272,7 @@ describe("autocompletion widget", function() {
     assert.isTrue(submenu1[1].isDisplayed() && submenu2.isDisplayed() && submenu3.isDisplayed() && submenu4.isDisplayed());
   });
 
+
   it("autocomplete default", function() {
     driver.findElement(wd.By.id("autocompletionWidget")).click();
     var submenu1 = driver.findElements(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Default layout']"));
@@ -274,6 +283,7 @@ describe("autocompletion widget", function() {
     input.sendKeys(wd.Keys.ENTER);
     assert.equal(input.getAttribute("value"), "Karlsruhe");
   });
+
 
   it("customized result list", function(done) {
     driver.findElement(wd.By.id("autocompletionWidget")).click();
@@ -289,6 +299,7 @@ describe("autocompletion widget", function() {
     }, 100);
   });
 
+
   it("result grouping", function(done) {
     // driver.findElement(wd.By.id("autocompletionWidget")).click();
     var submenu = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Result grouping']"));
@@ -301,10 +312,141 @@ describe("autocompletion widget", function() {
       done();
     }, 300);
   });
-
 });
 
 
+describe("rating widget", function() {
+  this.timeout(30000);
+  it("click at default settings", function() {
+    driver.findElement(wd.By.id("ratingWidget")).click();
+    waitUntil(wd.By.id("ratingTarget1"));
+    var items = driver.findElements(wd.By.xpath("//div[contains(@id,'ratingTarget1')]/span"));
+    for (var i = 0; i < items.length; i++) {
+      items[i].click();
+      var value = driver.findElement(wd.By.id("ratingdebug1")).getText();
+      assert.equal(value, "Value : " + (i + 1));
+    }
+  });
+
+
+  it("initial value set", function() {
+    driver.findElement(wd.By.id("ratingWidget")).click();
+    waitUntil(wd.By.id("ratingTarget2"));
+    var items = driver.findElements(wd.By.xpath("//div[contains(@id,'ratingTarget2')]/span"));
+    var itemsOff = driver.findElements(wd.By.xpath("//div[contains(@id,'ratingTarget2')]/span[contains(@class,'qx-rating-item qx-rating-item-off')]"));
+    assert.equal(itemsOff.length, 3);
+    for (var i = 0; i < items.length; i++) {
+      items[i].click();
+      var value = driver.findElement(wd.By.id("ratingdebug2")).getText();
+      assert.equal(value, "Value : " + (i + 1));
+    }
+  });
+
+
+  it("define rating length", function() {
+    driver.findElement(wd.By.id("ratingWidget")).click();
+    waitUntil(wd.By.id("ratingTarget3"));
+    var items = driver.findElements(wd.By.xpath("//div[contains(@id,'ratingTarget3')]/span"));
+    var itemsOff = driver.findElements(wd.By.xpath("//div[contains(@id,'ratingTarget3')]/span[contains(@class,'qx-rating-item qx-rating-item-off')]"));
+    assert.equal(items[0].getText(), "★");
+    assert.equal(itemsOff.length, 8);
+    for (var i = 0; i < items.length; i++) {
+      items[i].click();
+      var value = driver.findElement(wd.By.id("ratingdebug3")).getText();
+      assert.equal(value, "Value : " + (i + 1));
+    }
+  });
+
+
+  it("define custom icons", function() {
+    driver.findElement(wd.By.id("ratingWidget")).click();
+    waitUntil(wd.By.id("ratingTarget4"));
+    var items = driver.findElements(wd.By.xpath("//div[contains(@id,'ratingTarget4')]/span"));
+    assert.equal(items[0].getText(), "♥");
+    for (var i = 0; i < items.length; i++) {
+      items[i].click();
+      var value = driver.findElement(wd.By.id("ratingdebug4")).getText();
+      assert.equal(value, "Value : " + (i + 1));
+    }
+  });
+
+
+  it("define custom icons2", function() {
+    driver.findElement(wd.By.id("ratingWidget")).click();
+    waitUntil(wd.By.id("ratingTarget5"));
+    var items = driver.findElements(wd.By.xpath("//div[contains(@id,'ratingTarget5')]/span"));
+    assert.equal(items[0].getText(), "✔");
+    for (var i = 0; i < items.length; i++) {
+      items[i].click();
+      var value = driver.findElement(wd.By.id("ratingdebug5")).getText();
+      assert.equal(value, "Value : " + (i + 1));
+    }
+  });
+});
+
+
+describe("select box widget", function() {
+  this.timeout(30000);
+
+  it("select value", function() {
+    driver.findElement(wd.By.id("selectboxWidget")).click();
+    waitUntil(wd.By.xpath("//div[contains(@class,'qx-select-value')]"));
+    var select = driver.findElement(wd.By.xpath("//div[contains(@class,'qx-select-value')]"));
+    assert.equal(select.getText(), "Joomla");
+    select.click();
+    var slideshareEl = driver.findElement(wd.By.xpath("//ul[contains(@id,'mySelectBox')]/descendant::p[text()='Slideshare']"));
+    slideshareEl.click();
+    var debug = driver.findElement(wd.By.id("debug"));
+    assert.equal(debug.getText(), "selectedIndex : 1");
+    var submit = driver.findElement(wd.By.xpath("//input[contains(@type,'submit')]"));
+    submit.click();
+    assert.equal(debug.getText(), 'document.forms["testForm"].elements["mySelectBox"].value = Slideshare');
+  });
+});
+
+
+describe("accordion widget", function() {
+  this.timeout(30000);
+
+  it("show content", function() {
+    driver.findElement(wd.By.id("accordionWidget")).click();
+    waitUntil(wd.By.id('menuwrapper'));
+    var buttonA1 = driver.findElements(wd.By.xpath("//div[contains(@class,'button-a1')]"));
+    buttonA1[0].click();
+    var content = driver.findElements(wd.By.xpath("//div[contains(@class,'contentWrapper')]"));
+    assert.isTrue(content[0].isDisplayed());
+  });
+
+
+  it("show content2", function() {
+    driver.findElement(wd.By.id("accordionWidget")).click();
+    waitUntil(wd.By.id('menuwrapper'));
+    var buttonA1 = driver.findElements(wd.By.xpath("//div[contains(@class,'button-a1')]"));
+    buttonA1[1].click();
+    waitUntil(wd.By.xpath("//div[contains(@class,'contentWrapper')]"));
+    assert.equal(buttonA1[1].getText(), "JavaScript");
+    var content = driver.findElements(wd.By.xpath("//div[contains(@class,'contentWrapper')]"));
+    assert.isTrue(content[1].isDisplayed());
+  });
+});
+
+describe("tabs widget", function() {
+
+  it("click next tab", function() {
+    driver.findElement(wd.By.id("tabsWidget")).click();
+    var textHtml = driver.findElement(wd.By.id("demo-page0")).getText();
+    var tab2 = driver.findElement(wd.By.xpath("//li[contains(@class,'qx-tabs-button')][text()='JavaScript']"));
+    tab2.click();
+    var textJS = driver.findElement(wd.By.id("demo-page1")).getText();
+    var tab3 = driver.findElement(wd.By.xpath("//li[contains(@class,'qx-tabs-button')][text()='Css']"));
+    tab3.click();
+    var textCss = driver.findElement(wd.By.id("demo-page2")).getText();
+    var tab4 = driver.findElement(wd.By.xpath("//li[contains(@class,'qx-tabs-button')][text()='NodeJs']"));
+    tab4.click();
+    var textNodeJS = driver.findElement(wd.By.id("demo-page3"));
+    assert.notEqual(textHtml, textJS, textCss, textNodeJS);
+  });
+});
 
 
 
