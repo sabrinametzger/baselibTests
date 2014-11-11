@@ -1,0 +1,18 @@
+{
+  "name": "baselibTests",
+  "version": "0.0.1",
+  "description": "Integration testing",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.0.1",
+    "webdriver-sync": "^0.15.0",
+    "test": "mocha test"
+  },
+  "launch_in_dev": [
+    "node"
+  ],
+    "src_files": [
+    "setupWebdr.js",
+    "tests/*IT.js"
+  ]
+}
