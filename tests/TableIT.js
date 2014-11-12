@@ -16,11 +16,11 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("table widget", function() {
   this.timeout(30000);
 
   it("check submenu", function() {
-
     var menu = driver.findElement(wd.By.id("tableWidget"));
     webdrSetup.click(menu);
     var submenu1 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Dom based table']"));
@@ -29,8 +29,8 @@ describe("table widget", function() {
     assert.isTrue(submenu1.isDisplayed() && submenu2.isDisplayed() && submenu3.isDisplayed());
   });
 
-  it("check Dom based table", function() {
 
+  it("check Dom based table", function() {
     var menu = driver.findElement(wd.By.id("tableWidget"));
     webdrSetup.click(menu);
     driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Dom based table']")).click();
@@ -43,6 +43,7 @@ describe("table widget", function() {
     driver.findElement(wd.By.id("resetButton")).click();
     assert.equal(tableLength, driver.findElements(wd.By.xpath("//table[contains(@id,employeetable)]//tbody//tr")).length);
   });
+
 
   it("check model based table", function() {
     var menu = driver.findElement(wd.By.id("tableWidget"));
@@ -62,6 +63,7 @@ describe("table widget", function() {
     driver.findElement(wd.By.id("resetButton")).click();
     assert.equal(tableLength, driver.findElements(wd.By.xpath("//table[contains(@id,employeetable)]//tbody//tr")).length);
   });
+
 
   it("check custom paging", function() {
     var menu = driver.findElement(wd.By.id("tableWidget"));

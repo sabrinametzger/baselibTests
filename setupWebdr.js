@@ -7,7 +7,7 @@ var wd = require('webdriver-sync');
 var webdr = module.exports = {};
 
 webdr.setup = function(wd) {
-debugger;
+
   var caps;
   var capabilities = [];
   var url;
@@ -33,35 +33,33 @@ debugger;
   for (var key in caps) {
     capability.setCapability(key, caps[key]);
   }
-  //capability.setCapability("maxInstances",1);
-  //capability.setCapability("maxSession",1);
-  console.log(capability);
   driver = new wd.RemoteWebDriver(server + "/wd/hub", capability);
   driver.manage().window().maximize();
   driver.get(url);
   return driver;
+};
 
 
-}
 webdr.teardown = function(driver) {
   driver.quit();
+};
 
 
-}
-
-webdr.waitUntil= function (byLocator, timeout) {
+webdr.waitUntil = function(byLocator, timeout) {
   var wait = new wd.WebDriverWait(driver, timeout | 5); //default:5s
   var condition = wd.ExpectedConditions.visibilityOfElementLocated(byLocator);
   return wait.until(condition);
-}
+};
+
 
 webdr.waitUntilVisible = function(WebElement, timeout) {
   var wait = new wd.WebDriverWait(driver, timeout | 5); //default:5s
   var condition = wd.ExpectedConditions.visibilityOf(WebElement);
   return wait.until(condition);
-}
+};
+
 
 webdr.click = function(WebElement) {
   driver.getMouse()._instance.mouseDownSync(WebElement._instance.getCoordinatesSync());
   driver.getMouse()._instance.mouseUpSync(WebElement._instance.getCoordinatesSync());
-}
+};

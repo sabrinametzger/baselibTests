@@ -16,10 +16,11 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("button widget", function() {
-this.timeout(30000);
+  this.timeout(30000);
+
   it("click button", function() {
-    debugger;
     //drawer has also id 'buttonWidget'
     var menu = driver.findElements(wd.By.id("buttonWidget"));
     webdrSetup.click(menu[1]);

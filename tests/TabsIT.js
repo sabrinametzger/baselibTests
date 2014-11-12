@@ -16,8 +16,10 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("tabs widget", function() {
   this.timeout(30000);
+
   it("click next tab", function() {
     var menu = driver.findElement(wd.By.id("tabsWidget"));
     webdrSetup.click(menu);

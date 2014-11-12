@@ -16,45 +16,48 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("calendar widget", function() {
     this.timeout(30000);
-  // it("check submenu", function() {
-  //   var menu = driver.findElement(wd.By.id("calendarWidget"));
-  //   webdrSetup.click(menu);
 
-  //   var submenu1 = driver.findElements(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Default layout']"));
-  //   var submenu2 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Range selection']"));
-  //   var submenu3 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Custom range selection 1']"));
-  //   var submenu4 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Custom range selection 2']"));
-  //   assert.isTrue(submenu1[0].isDisplayed() && submenu2.isDisplayed() && submenu3.isDisplayed() && submenu4.isDisplayed());
-  // });
+  it("check submenu", function() {
+    var menu = driver.findElement(wd.By.id("calendarWidget"));
+    webdrSetup.click(menu);
+
+    var submenu1 = driver.findElements(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Default layout']"));
+    var submenu2 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Range selection']"));
+    var submenu3 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Custom range selection 1']"));
+    var submenu4 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Custom range selection 2']"));
+    assert.isTrue(submenu1[0].isDisplayed() && submenu2.isDisplayed() && submenu3.isDisplayed() && submenu4.isDisplayed());
+  });
 
 
-  // it("check default layout", function() {
-  //   var menu = driver.findElement(wd.By.id("calendarWidget"));
-  //   webdrSetup.click(menu);
-  //   var submenu1 = driver.findElements(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Default layout']"));
-  //   submenu1[0].click();
-  //   var day = driver.findElements(wd.By.xpath("//button[contains(@class,'qx-calendar-day')]"));
-  //   //in this case it is not possible to check the attribute after clicking
-  //   var dayText = day[16].getAttribute("value");
+  it("check default layout", function() {
+    var menu = driver.findElement(wd.By.id("calendarWidget"));
+    webdrSetup.click(menu);
+    var submenu1 = driver.findElements(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Default layout']"));
+    submenu1[0].click();
+    var day = driver.findElements(wd.By.xpath("//button[contains(@class,'qx-calendar-day')]"));
+    //in this case it is not possible to check the attribute after clicking
+    var dayText = day[16].getAttribute("value");
 
-  //   // console.log(day[16].getAttribute("value"));
-  //   var regExp = new RegExp(/(\w\w\w)\s(\w\w\w)\s(\d\d)\s(\d\d\d\d)/);
-  //   var date = dayText.match(regExp);
-  //   var daySelected = date[3];
-  //   day[16].click();
-  //   //assert.match(dayText,regExp);
-  //   var d = new Date();
-  //   var n = d.getMonth();
-  //   var y = d.getFullYear();
-  //   var output = driver.findElement(wd.By.id("output"));
-  //   if (output.getText() === ("Current Date: " + daySelected + "." + (n + 1) + "." + y) || output.getText() === ("Current Date: " + (n+1) + "/" + daySelected+ "/" + y)) {
-  //     assert.isTrue(true);
-  //   } else {
-  //     assert.isTrue(false);
-  //   }
-  // });
+    // console.log(day[16].getAttribute("value"));
+    var regExp = new RegExp(/(\w\w\w)\s(\w\w\w)\s(\d\d)\s(\d\d\d\d)/);
+    var date = dayText.match(regExp);
+    var daySelected = date[3];
+    day[16].click();
+    //assert.match(dayText,regExp);
+    var d = new Date();
+    var n = d.getMonth();
+    var y = d.getFullYear();
+    var output = driver.findElement(wd.By.id("output"));
+    if (output.getText() === ("Current Date: " + daySelected + "." + (n + 1) + "." + y) || output.getText() === ("Current Date: " + (n+1) + "/" + daySelected+ "/" + y)) {
+      assert.isTrue(true);
+    } else {
+      assert.isTrue(false);
+    }
+  });
+
 
   it("check range selection", function() {
     var menu = driver.findElement(wd.By.id("calendarWidget"));
@@ -68,6 +71,7 @@ describe("calendar widget", function() {
     var selectedDays = driver.findElements(wd.By.xpath("//td[contains(@class,'qx-calendar-selected')]"));
     assert.isTrue(selectedDays.length === 4);
   });
+
 
   it("check custom range selection 1", function() {
     var menu = driver.findElement(wd.By.id("calendarWidget"));

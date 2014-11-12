@@ -16,8 +16,10 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("pointer-events widget", function() {
   this.timeout(30000);
+
   it("click event handling Click", function() {
     var menu = driver.findElement(wd.By.id("pointerEvents"));
     webdrSetup.click(menu);
@@ -27,6 +29,7 @@ describe("pointer-events widget", function() {
     var infoarea = driver.findElement(wd.By.id("info-text"));
     assert.equal(infoarea.getText(), "Hit the \"click\" button!");
   });
+
 
   it("click event handling Tap", function() {
     var menu = driver.findElement(wd.By.id("pointerEvents"));

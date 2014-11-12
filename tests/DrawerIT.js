@@ -16,8 +16,10 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("drawer widget", function() {
   this.timeout(30000);
+
   it("show drawer left", function() {
     //first drawer
     var menu = driver.findElements(wd.By.id("buttonWidget"));
@@ -41,6 +43,7 @@ describe("drawer widget", function() {
     assert.isTrue(left3.isDisplayed(), "3");
     driver.findElement(wd.By.xpath("//label[contains(@class,'center buttonHide button-b3')][contains(@data-target,'drawer6')]")).click();
   });
+
 
   it("show drawer right", function() {
     //first drawer
@@ -89,8 +92,8 @@ describe("drawer widget", function() {
     var top3 = driver.findElement(wd.By.id("drawer3"));
     assert.isTrue(top3.isDisplayed(), "3");
     driver.findElement(wd.By.xpath("//label[contains(@class,'center buttonHide button-b3')][contains(@data-target,'drawer3')]")).click();
-
   });
+
 
   it("show drawer bottom", function() {
     //first drawer
@@ -109,7 +112,7 @@ describe("drawer widget", function() {
     assert.isTrue(bottom2.isDisplayed(), "2");
     wd.sleep(1000);
     driver.findElement(wd.By.xpath("//label[contains(@class,'center buttonHide button-b3')][contains(@data-target,'drawer11')]")).click();
-    wd.sleep(1000);
+    wd.sleep(1500);
     //3rd drawer
     driver.findElement(wd.By.xpath("//label[contains(@class,'button-a1')][text()='Show bottom drawer III']")).click();
     var bottom3 = driver.findElement(wd.By.id("drawer12"));
@@ -117,6 +120,7 @@ describe("drawer widget", function() {
     assert.isTrue(bottom3.isDisplayed(), "3");
     driver.findElement(wd.By.xpath("//label[contains(@class,'center buttonHide button-b3')][contains(@data-target,'drawer12')]")).click();
   });
+
 
   it("click reset", function() {
     var menu = driver.findElements(wd.By.id("buttonWidget"));

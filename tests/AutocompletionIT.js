@@ -16,16 +16,14 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
-describe("autocompletion widget", function() {
 
+describe("autocompletion widget", function() {
   this.timeout(30000);
 
   it("check submenu", function() {
     var menu = driver.findElement(wd.By.id("autocompletionWidget"));
     webdrSetup.click(menu);
-
     var submenu1 = driver.findElements(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Default layout']"));
-
     var submenu2 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Customized result list']"));
     var submenu3 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Result grouping']"));
     var submenu4 = driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Multiple datasources']"));
@@ -54,10 +52,8 @@ describe("autocompletion widget", function() {
     wd.sleep(400);
     var input = driver.findElement(wd.By.id("autocomplete"));
     input.sendKeys("dai");
-
     input.sendKeys(wd.Keys.ENTER);
     assert.equal(input.getAttribute("value"), "DAILYMOTION");
-
   });
 
 
@@ -69,11 +65,8 @@ describe("autocompletion widget", function() {
     submenu.click();
     wd.sleep(500);
     var input = driver.findElement(wd.By.id("autocomplete"));
-
     input.click();
-
     input.sendKeys("ma");
-
     input.sendKeys(wd.Keys.ENTER);
     input.sendKeys(wd.Keys.RETURN);
     wd.sleep(400);

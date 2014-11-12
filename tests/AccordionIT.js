@@ -11,9 +11,11 @@ before(function() {
   driver = webdrSetup.setup(wd);
 });
 
+
 after(function() {
  webdrSetup.teardown(driver);
 });
+
 
 describe("accordion widget", function() {
   this.timeout(30000);

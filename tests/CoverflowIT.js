@@ -16,6 +16,7 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("coverflow widget", function() {
   this.timeout(30000);
 
@@ -50,8 +51,6 @@ describe("coverflow widget", function() {
     driver.findElement(wd.By.xpath("//li[contains(@id,'item2')]")).click();
     wd.sleep(400);
     el.click();
-
-
   });
 
 
@@ -59,11 +58,14 @@ describe("coverflow widget", function() {
     var menu = driver.findElement(wd.By.id("coverflowWidget"));
     webdrSetup.click(menu);
     driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Customized layout']")).click();
-    var el = driver.findElement(wd.By.xpath("//li[contains(@class,'qx-coverflow-right')]"));
-    wd.sleep(300);
-    el.click();
-
+    wd.sleep(500);
+    var elements = driver.findElements(wd.By.xpath("//li[contains(@class,'qx-coverflow-right')]"));
+    elements[1].click();
+    wd.sleep(1000);
+    var elementsLeft = driver.findElements(wd.By.xpath("//li[contains(@class,'qx-coverflow-left')]"));
+    elementsLeft[3].click();
   });
+
 
   it("check carousel mode", function() {
     var menu = driver.findElement(wd.By.id("coverflowWidget"));

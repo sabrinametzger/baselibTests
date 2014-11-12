@@ -16,8 +16,10 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("toggle widget", function() {
-    this.timeout(30000);
+  this.timeout(30000);
+
   it("click toggle button", function() {
     var menu = driver.findElement(wd.By.id("toggleWidget"));
     webdrSetup.click(menu);

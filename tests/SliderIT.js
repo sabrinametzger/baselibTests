@@ -16,6 +16,7 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("slider widget", function() {
   this.timeout(30000);
 

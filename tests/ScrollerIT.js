@@ -16,8 +16,10 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("scroller widget", function() {
   this.timeout(700000);
+
   it("check submenu", function() {
     var menu = driver.findElement(wd.By.id("scrollerWidget"));
     webdrSetup.click(menu);

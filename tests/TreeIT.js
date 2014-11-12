@@ -18,9 +18,11 @@ after(function() {
 
 describe("tree widget", function() {
   this.timeout(30000);
+
   beforeEach(function() {
     wd.sleep(2000);
   });
+
   it("create new folder", function() {
     var menu = driver.findElement(wd.By.id("treeWidget"));
     webdrSetup.click(menu);
@@ -31,6 +33,7 @@ describe("tree widget", function() {
     var tree = driver.findElement(wd.By.xpath("//ul[contains(@class,'qx-tree baselib-tree')]"));
     assert.isTrue(tree.getText().indexOf("Testfolder") != -1);
   });
+
 
   it("cancel folder", function() {
     var menu = driver.findElement(wd.By.id("treeWidget"));
@@ -61,7 +64,7 @@ describe("tree widget", function() {
     }
   });
 
-  //missing assert for disableing
+
   it("disable multi selection", function() {
     var menu = driver.findElement(wd.By.id("treeWidget"));
     webdrSetup.click(menu);

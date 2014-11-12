@@ -16,6 +16,7 @@ after(function() {
   webdrSetup.teardown(driver);
 });
 
+
 describe("datePicker widget", function() {
   this.timeout(30000);
 
@@ -26,6 +27,7 @@ describe("datePicker widget", function() {
     var headline = driver.findElement(wd.By.xpath("//h1[contains(@class,'headline-a1')]")).getText();
     assert.equal(headline, "Date Picker");
   });
+
 
   it("check date picker with user input enabled", function() {
     var input = driver.findElement(wd.By.id("datepicker-basic"));
