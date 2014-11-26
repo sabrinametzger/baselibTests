@@ -4,7 +4,6 @@
  *
  */
 var wd = require('webdriver-sync');
-var Args = require('arg-parser');
 var nopt = require('nopt');
 
 var webdr = module.exports = {};
