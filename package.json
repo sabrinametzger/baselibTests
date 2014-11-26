@@ -2,11 +2,11 @@
   "name": "baselibTests",
   "version": "0.0.1",
   "description": "Integration testing",
+  "test": "mocha test",
   "devDependencies": {
     "chai": "^1.10.0",
     "mocha": "^2.0.1",
-    "webdriver-sync": "^0.15.0",
-    "test": "mocha test"
+    "webdriver-sync": "^0.15.0"
   },
   "launch_in_dev": [
     "node"
