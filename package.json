@@ -6,12 +6,13 @@
   "devDependencies": {
     "chai": "^1.10.0",
     "mocha": "^2.0.1",
+    "nopt": "^3.0.1",
     "webdriver-sync": "^0.15.0"
   },
   "launch_in_dev": [
     "node"
   ],
-    "src_files": [
+  "src_files": [
     "setupWebdr.js",
     "tests/*IT.js"
   ]
