@@ -7,7 +7,6 @@ var wd = require('webdriver-sync');
 var nopt = require('nopt');
 
 var webdr = module.exports = {};
-
 webdr.setup = function(wd) {
 
   knownOpts = {
@@ -22,7 +21,7 @@ webdr.setup = function(wd) {
     capability.setCapability(key, caps[key]);
   }
   if (parsed.server) {
-    driver = new wd.RemoteWebDriver(parsed.server + "/wd/hub", caps);
+    driver = new wd.RemoteWebDriver(parsed.server + "/wd/hub", capability);
   }
   driver.manage().window().maximize();
   driver.get(parsed.url);
