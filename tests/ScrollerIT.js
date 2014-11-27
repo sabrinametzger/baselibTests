@@ -6,19 +6,14 @@ var assert = chai.assert;
 var webdrSetup = require('../setupWebdr.js');
 var driver;
 
-before(function() {
-    this.timeout(30000);
-  driver = webdrSetup.setup(wd);
-});
-
-
-after(function() {
-  webdrSetup.teardown(driver);
-});
-
 
 describe("scroller widget", function() {
   this.timeout(700000);
+
+  before(function() {
+    driver = webdrSetup.reset();
+  });
+
 
   it("check submenu", function() {
     var menu = driver.findElement(wd.By.id("scrollerWidget"));
@@ -57,7 +52,8 @@ describe("scroller widget", function() {
     assert.isTrue(item49.isDisplayed());
   });
 
-  it.skip("scroll horizontal", function() {
+
+  it.only("scroll horizontal", function() {
     var menu = driver.findElement(wd.By.id("scrollerWidget"));
     webdrSetup.click(menu);
     driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Horizontal scroller']")).click();

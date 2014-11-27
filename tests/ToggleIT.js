@@ -6,19 +6,13 @@ var assert = chai.assert;
 var webdrSetup = require('../setupWebdr.js');
 var driver;
 
-before(function() {
-  this.timeout(30000);
-  driver = webdrSetup.setup(wd);
-});
-
-
-after(function() {
-  webdrSetup.teardown(driver);
-});
-
-
 describe("toggle widget", function() {
   this.timeout(30000);
+
+  before(function() {
+    driver = webdrSetup.reset();
+  });
+
 
   it("click toggle button", function() {
     var menu = driver.findElement(wd.By.id("toggleWidget"));

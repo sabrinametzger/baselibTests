@@ -6,19 +6,14 @@ var assert = chai.assert;
 var webdrSetup = require('../setupWebdr.js');
 var driver;
 
-before(function() {
-  this.timeout(30000);
-  driver = webdrSetup.setup(wd);
-});
-
-
-after(function() {
-  webdrSetup.teardown(driver);
-});
-
 
 describe("table widget", function() {
   this.timeout(30000);
+
+  before(function() {
+    driver = webdrSetup.reset();
+  });
+
 
   it("check submenu", function() {
     var menu = driver.findElement(wd.By.id("tableWidget"));
@@ -68,6 +63,7 @@ describe("table widget", function() {
   it("check custom paging", function() {
     var menu = driver.findElement(wd.By.id("tableWidget"));
     menu.click();
+    wd.sleep(800);
     driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Custom paging']")).click();
     var pages = driver.findElements(wd.By.xpath("//div[contains(@class,'clearfix')]/span"));
     pages[0].click();

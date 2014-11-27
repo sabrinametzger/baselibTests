@@ -6,19 +6,15 @@ var assert = chai.assert;
 var webdrSetup = require('../setupWebdr.js');
 var driver;
 
-before(function() {
-  this.timeout(30000);
-  driver = webdrSetup.setup(wd);
-});
-
-
-after(function() {
-  webdrSetup.teardown(driver);
-});
 
 
 describe("calendar widget", function() {
-    this.timeout(30000);
+  this.timeout(30000);
+
+  before(function() {
+    driver = webdrSetup.reset();
+  });
+
 
   it("check submenu", function() {
     var menu = driver.findElement(wd.By.id("calendarWidget"));
@@ -51,7 +47,7 @@ describe("calendar widget", function() {
     var n = d.getMonth();
     var y = d.getFullYear();
     var output = driver.findElement(wd.By.id("output"));
-    if (output.getText() === ("Current Date: " + daySelected + "." + (n + 1) + "." + y) || output.getText() === ("Current Date: " + (n+1) + "/" + daySelected+ "/" + y)) {
+    if (output.getText() === ("Current Date: " + daySelected + "." + (n + 1) + "." + y) || output.getText() === ("Current Date: " + (n + 1) + "/" + daySelected + "/" + y)) {
       assert.isTrue(true);
     } else {
       assert.isTrue(false);

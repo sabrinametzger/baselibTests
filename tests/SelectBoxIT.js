@@ -6,19 +6,14 @@ var assert = chai.assert;
 var webdrSetup = require('../setupWebdr.js');
 var driver;
 
-before(function() {
-  this.timeout(30000);
-  driver = webdrSetup.setup(wd);
-});
-
-
-after(function() {
- webdrSetup.teardown(driver);
-});
-
 
 describe("select box widget", function() {
   this.timeout(30000);
+
+  before(function() {
+    driver = webdrSetup.reset();
+  });
+
 
   it("select value", function() {
     var menu = driver.findElement(wd.By.id("selectboxWidget"));
