@@ -53,7 +53,7 @@ describe("scroller widget", function() {
   });
 
 
-  it.only("scroll horizontal", function() {
+  it("scroll horizontal", function() {
     var menu = driver.findElement(wd.By.id("scrollerWidget"));
     webdrSetup.click(menu);
     driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Horizontal scroller']")).click();
