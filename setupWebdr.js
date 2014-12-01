@@ -39,6 +39,9 @@ webdr.setup = function(wd) {
   driver.manage().window().maximize();
   url = parsed.url;
   driver.get(parsed.url);
+  webdr.waitUntil(wd.By.xpath("//a[contains(@href,'./demos/')]"));
+  driver.findElement(wd.By.xpath("//a[contains(@href,'./demos/')]")).click();
+  url = driver.getCurrentUrl();
   return driver;
 };
 
@@ -55,7 +58,10 @@ webdr.reset = function(){
   return driver;
 }
 webdr.waitUntil = function(byLocator, timeout) {
-  var wait = new wd.WebDriverWait(driver, timeout || 5); //default:5s
+    if(!timeout){
+    timeout = 5;
+  }
+  var wait = new wd.WebDriverWait(driver, timeout); //default:5s
   var condition = wd.ExpectedConditions.visibilityOfElementLocated(byLocator);
   return wait.until(condition);
 };

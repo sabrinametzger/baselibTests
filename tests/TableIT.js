@@ -63,10 +63,11 @@ describe("table widget", function() {
   it("check custom paging", function() {
     var menu = driver.findElement(wd.By.id("tableWidget"));
     menu.click();
-    wd.sleep(800);
     driver.findElement(wd.By.xpath("//li[contains(@class,'submenu')]/descendant::a[text() = 'Custom paging']")).click();
+    webdrSetup.waitUntil(wd.By.xpath("//div[contains(@class,'clearfix')]/span"));
     var pages = driver.findElements(wd.By.xpath("//div[contains(@class,'clearfix')]/span"));
     pages[0].click();
+
     assert.isTrue(pages[0].getText() == "4");
     assert.isTrue(driver.findElements(wd.By.xpath("//div[contains(@class,'qx-table-cell')]"))[0].getText().indexOf("Shou") != -1);
   });
