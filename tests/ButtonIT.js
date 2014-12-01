@@ -18,7 +18,7 @@ describe("button widget", function() {
   it("click button", function() {
     //drawer has also id 'buttonWidget'
     var menu = driver.findElements(wd.By.id("buttonWidget"));
-    webdrSetup.click(menu[1]);
+    webdrSetup.click(menu);
     wd.sleep(1000);
     var button = driver.findElement(wd.By.xpath("//button[contains(@id,'button-example')]"));
     button.click();

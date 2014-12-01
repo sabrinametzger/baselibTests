@@ -17,8 +17,8 @@ describe("drawer widget", function() {
 
   it("show drawer left", function() {
     //first drawer
-    var menu = driver.findElements(wd.By.id("buttonWidget"));
-    webdrSetup.click(menu[0]);
+    var menu = driver.findElement(wd.By.id("drawerWidget"));
+    webdrSetup.click(menu);
     driver.findElement(wd.By.xpath("//label[contains(@class,'button-a1')][text()='Show left drawer I']")).click();
     var left1 = driver.findElement(wd.By.id("drawer4"));
     assert.isTrue(left1.isDisplayed(), "1");
@@ -42,8 +42,8 @@ describe("drawer widget", function() {
 
   it("show drawer right", function() {
     //first drawer
-    var menu = driver.findElements(wd.By.id("buttonWidget"));
-    webdrSetup.click(menu[0]);
+    var menu = driver.findElement(wd.By.id("drawerWidget"));
+    webdrSetup.click(menu);
     driver.findElement(wd.By.xpath("//label[contains(@class,'button-a1')][text()='Show right drawer I']")).click();
     var right1 = driver.findElement(wd.By.id("drawer7"));
     assert.isTrue(right1.isDisplayed(), "1");
@@ -67,8 +67,8 @@ describe("drawer widget", function() {
 
   it("show drawer top", function() {
     //first drawer
-    var menu = driver.findElements(wd.By.id("buttonWidget"));
-    webdrSetup.click(menu[0]);
+    var menu = driver.findElement(wd.By.id("drawerWidget"));
+    webdrSetup.click(menu);
     driver.findElement(wd.By.xpath("//label[contains(@class,'button-a1')][text()='Show top drawer I']")).click();
     var top1 = driver.findElement(wd.By.id("drawer1"));
     assert.isTrue(top1.isDisplayed(), "1");
@@ -92,8 +92,8 @@ describe("drawer widget", function() {
 
   it("show drawer bottom", function() {
     //first drawer
-    var menu = driver.findElements(wd.By.id("buttonWidget"));
-    webdrSetup.click(menu[0]);
+    var menu = driver.findElement(wd.By.id("drawerWidget"));
+    webdrSetup.click(menu);
     wd.sleep(1000);
     driver.findElement(wd.By.xpath("//label[contains(@class,'button-a1')][text()='Show bottom drawer I']")).click();
     var bottom1 = driver.findElement(wd.By.id("drawer10"));
@@ -118,8 +118,8 @@ describe("drawer widget", function() {
 
 
   it("click reset", function() {
-    var menu = driver.findElements(wd.By.id("buttonWidget"));
-    webdrSetup.click(menu[0]);
+    var menu = driver.findElement(wd.By.id("drawerWidget"));
+    webdrSetup.click(menu);
     driver.findElement(wd.By.xpath("//label[contains(@class,'button-a1')][text()='Show left drawer I']")).click();
     driver.findElement(wd.By.xpath("//label[contains(@class,'button-a2')][text()='RESET']")).click();
   });
